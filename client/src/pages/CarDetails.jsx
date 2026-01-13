@@ -207,21 +207,28 @@ const CarDetails = () => {
 
     const fetchCarDetails = async () => {
         try {
-            // Ideally use /api/car/:id, falling back to finding in list
-            const { data } = await axios.get('/api/user/cars'); 
+            setLoading(true);
+            // Now fetching only the specific car
+            const { data } = await axios.get(`/api/user/car/${id}`);
+            
             if (data.success) {
-                const foundCar = data.cars.find(c => c._id === id);
-                if (foundCar) setCar(foundCar);
-                else { toast.error("Car not found"); navigate('/cars'); }
+                setCar(data.car);
+            } else {
+                toast.error("Car not found");
+                navigate('/cars');
             }
         } catch (error) {
+            console.error(error);
             toast.error("Error fetching details");
+            navigate('/cars');
         } finally {
             setLoading(false);
         }
     }
 
-    useEffect(() => { fetchCarDetails(); }, [id])
+    useEffect(() => { 
+        if (id) fetchCarDetails(); 
+    }, [id]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

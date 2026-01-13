@@ -13,7 +13,7 @@
 
 //UPDATED 3
 import express from 'express';
-import { getUserData, loginUser, registerUser, getAllCars, searchAvailableCars } from '../controllers/userController.js';
+import { getUserData, loginUser, registerUser, getAllCars, searchAvailableCars,getCarById } from '../controllers/userController.js';
 import { protect } from '../middleware/auth.js';
 
 const userRouter = express.Router();
@@ -23,5 +23,6 @@ userRouter.post('/login', loginUser);
 userRouter.get('/data', protect, getUserData);
 userRouter.get('/cars', getAllCars); 
 userRouter.get('/cars/search', searchAvailableCars); // ✅ Added
+userRouter.get('/car/:id', getCarById);
 
 export default userRouter;

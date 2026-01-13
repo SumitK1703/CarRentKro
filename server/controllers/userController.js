@@ -90,8 +90,9 @@ import Car from '../models/Car.js';
 import Booking from '../models/Booking.js'; 
 
 const generateToken = (userId) => {
-    const payload = userId;
-    return jwt.sign(payload, process.env.JWT_SECRET);
+    // ✅ Change: Sign an object { id: userId } instead of just the string
+    // ✅ Change: Add 'expiresIn' (1d, 7d, 1h, etc.)
+    return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
 }
 
 export const registerUser = async (req, res) => {
@@ -181,5 +182,20 @@ export const searchAvailableCars = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Search failed" });
+    }
+};
+export const getCarById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const car = await Car.findById(id).populate('owner', 'name email image'); // Optional: populate owner details if needed
+
+        if (!car) {
+            return res.status(404).json({ success: false, message: "Car not found" });
+        }
+
+        res.status(200).json({ success: true, car });
+    } catch (error) {
+        console.error("Error fetching car:", error);
+        res.status(500).json({ success: false, message: "Error fetching car details", error: error.message });
     }
 };

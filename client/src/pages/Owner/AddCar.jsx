@@ -37,8 +37,9 @@ const AddCar = () => {
         setIsLoading(true);
         try {
             const formData = new FormData();
-            formData.append('image', image);
+            
             formData.append('carData', JSON.stringify(car));
+            formData.append('image', image);
 
             const { data } = await axios.post('/api/owner/add-car', formData, {
                  headers: { token: localStorage.getItem('token') }

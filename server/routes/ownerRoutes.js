@@ -8,7 +8,7 @@ import {
     deleteCar, 
     toggleCarAvailability, 
     getDashboardData, 
-    updateProfileImage 
+    updateProfileImage
 } from '../controllers/ownerController.js';
 
 const ownerRouter = express.Router();
