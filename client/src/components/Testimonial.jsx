@@ -48,7 +48,7 @@
 
 // export default Testimonial
 import React from 'react'
-
+import {motion} from 'motion/react';
 const Testimonial = () => {
     const testimonials = [
         {
@@ -83,7 +83,12 @@ const Testimonial = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
                 {testimonials.map((item, index) => (
-                    <div key={index} className="bg-white rounded-xl shadow-[0px_10px_40px_rgba(0,0,0,0.05)] p-8 border border-gray-100 text-left hover:shadow-xl transition-all duration-300">
+                    <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.2, ease: 'easeOut' }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    key={index} className="bg-white rounded-xl shadow-[0px_10px_40px_rgba(0,0,0,0.05)] p-8 border border-gray-100 text-left hover:shadow-xl transition-all duration-300">
                         <div className="flex items-center gap-4 mb-4">
                             <img className="h-14 w-14 rounded-full object-cover border-2 border-gray-100" src={item.image} alt={item.name} />
                             <div>
@@ -101,7 +106,7 @@ const Testimonial = () => {
                         </div>
 
                         <p className="text-gray-600 leading-relaxed text-sm">"{item.text}"</p>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
     </div>

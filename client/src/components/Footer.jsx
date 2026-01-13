@@ -1,14 +1,29 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import {motion} from 'motion/react';
 
 const Footer = () => {
   return (
-    <div className='bg-white text-gray-600 pt-16 pb-8 px-6 md:px-16 lg:px-24 xl:px-32'>
+    <motion.div 
+    initial={{ y: 50, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.6 }}
+    className='bg-white text-gray-600 pt-16 pb-8 px-6 md:px-16 lg:px-24 xl:px-32'>
         {/* --- Top Section: 4 Columns --- */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
+        <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.3 }}
+        className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
             
             {/* Column 1: Logo, Description & Socials */}
-            <div className='flex flex-col gap-4'>
+            <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.3 }}
+            className='flex flex-col gap-4'>
                 <img src={assets.logo} alt="Car Rental Logo" className='h-8 w-auto self-start' />
                 <p className='text-sm leading-relaxed text-gray-500'>
                     Premium car rental service with a wide selection of luxury and everyday vehicles for all your driving needs.
@@ -23,10 +38,15 @@ const Footer = () => {
                     {/* Mail Icon */}
                     <svg className="w-5 h-5 cursor-pointer hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Column 2: Quick Links */}
-            <div>
+            <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+            viewport={{ once: true, amount: 0.3 }}
+            >
                 <h3 className='font-bold text-gray-900 mb-4'>QUICK LINKS</h3>
                 <ul className='flex flex-col gap-2 text-sm text-gray-500'>
                     <li><a href="/" className='hover:text-black transition-colors'>Home</a></li>
@@ -34,10 +54,15 @@ const Footer = () => {
                     <li><a href="#" className='hover:text-black transition-colors'>List Your Car</a></li>
                     <li><a href="#" className='hover:text-black transition-colors'>About Us</a></li>
                 </ul>
-            </div>
+            </motion.div>
 
             {/* Column 3: Resources */}
-            <div>
+            <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.4 }}
+            viewport={{ once: true, amount: 0.3 }}
+            >
                 <h3 className='font-bold text-gray-900 mb-4'>RESOURCES</h3>
                 <ul className='flex flex-col gap-2 text-sm text-gray-500'>
                     <li><a href="#" className='hover:text-black transition-colors'>Help Center</a></li>
@@ -45,10 +70,15 @@ const Footer = () => {
                     <li><a href="#" className='hover:text-black transition-colors'>Privacy Policy</a></li>
                     <li><a href="#" className='hover:text-black transition-colors'>Insurance</a></li>
                 </ul>
-            </div>
+            </motion.div>
 
             {/* Column 4: Contact */}
-            <div>
+            <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.6 }}
+            viewport={{ once: true, amount: 0.3 }}
+            >
                 <h3 className='font-bold text-gray-900 mb-4'>CONTACT</h3>
                 <ul className='flex flex-col gap-2 text-sm text-gray-500'>
                     <li>1234 Luxury Drive</li>
@@ -56,8 +86,8 @@ const Footer = () => {
                     <li>+1 234 567 890</li>
                     <li>info@example.com</li>
                 </ul>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
 
         {/* --- Bottom Section: Copyright & Links --- */}
         <div className='border-t border-gray-200 mt-12 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500'>
@@ -70,7 +100,7 @@ const Footer = () => {
                 <a href="#" className='hover:text-black'>Cookies</a>
             </div>
         </div>
-    </div>
+    </motion.div>
   )
 }
 
