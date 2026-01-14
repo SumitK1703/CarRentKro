@@ -98,17 +98,18 @@ function Navbar() {
     // 1. State for the search input
     const [navSearch, setNavSearch] = useState('');
 
-    const changeRole = async () => {
-        try {
-            const { data } = await axios.post('/api/user/change-to-owner'); // Ensure endpoint is correct
-            if (data.success) {
-                setIsOwner(!isOwner);
-                toast.success("Role changed successfully");
-            }
-        } catch (error) {
-            toast.error("Failed to change role", error.message);
+   const changeRole = async () => {
+    try {
+        // ✅ CORRECT: This route is defined in ownerRouter
+        const { data } = await axios.post('/api/owner/change-to-owner'); 
+        if (data.success) {
+            setIsOwner(!isOwner);
+            toast.success("Role changed successfully");
         }
+    } catch (error) {
+        toast.error("Failed to change role", error.message);
     }
+}
 
     // 2. The Search Action: Redirects to /cars with the query
     const handleSearch = () => {
