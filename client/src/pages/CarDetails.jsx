@@ -197,7 +197,7 @@ import {motion} from 'motion/react';
 const CarDetails = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const { axios, currency } = useAppContext()
+    const { axios, currency, token, setShowLogin } = useAppContext()
     const [car, setCar] = useState(null)
     const [loading, setLoading] = useState(true)
     
@@ -232,7 +232,18 @@ const CarDetails = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!token) {
+            toast.error("Please sign in first to book a car");
+            setShowLogin(true); // Open login modal
+            return;
+        }
+
         if(!startDate || !endDate) return toast.error("Please select dates");
+        if (new Date(endDate) < new Date(startDate)) {
+            toast.error("Drop-off date cannot be earlier than pick-up date");
+            return;
+        }
 
         try {
             const { data } = await axios.post('/api/booking/create', {

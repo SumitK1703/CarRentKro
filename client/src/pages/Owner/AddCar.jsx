@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { assets } from '../../assets/assets.js';
 import Title from '../../components/Title.jsx';
 import { useAppContext } from '../../context/AppContext.jsx';
 import toast from 'react-hot-toast';
-
+import { assets, cityList } from '../../assets/assets.js';
 const AddCar = () => {
     const { axios, currency } = useAppContext();
     const [image, setImage] = useState(null);
@@ -158,14 +157,12 @@ const AddCar = () => {
                 {/* Location & Description */}
                 <div className='flex flex-col w-full'>
                     <label>Location</label>
-                    <select onChange={e => setCar({ ...car, location: e.target.value })} value={car.location} className='px-3 py-2 mt-1 border border-borderColor rounded-md outline-none'>
-                        <option value="">Select Location</option>
-                        <option value="New York">New York</option>
-                        <option value="Los Angeles">Los Angeles</option>
-                        <option value="Chicago">Chicago</option>
-                        <option value="Las Vegas">Las Vegas</option>
-                        <option value="Mumbai">Mumbai</option>
-                        <option value="Delhi">Delhi</option>
+                    <select 
+                        onChange={e => setCar({ ...car, location: e.target.value })} 
+                        value={car.location} 
+                        className='px-3 py-2 mt-1 border border-borderColor rounded-md outline-none'>
+                            <option value="">Select Location</option>
+                                {cityList.map((city, index) => (<option key={index} value={city}>{city}</option>))}
                     </select>
                 </div>
                 <div className='flex flex-col w-full'>
